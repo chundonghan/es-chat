@@ -1,0 +1,70 @@
+
+div.send_pop{
+	display: none; 
+	position: absolute; 
+	top: 0%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	background-color: white; 
+	z-index:1001; 
+	background-color: #D8DEE2;
+}
+div.headline{
+	padding-left: 2%;
+	padding-right: 2%;
+	
+	width: 96%;
+	height: 2.5rem;
+	background-color: #3c3c3c;
+	line-height: 2.5rem;
+}
+
+a#cancel{
+	text-decoration: none;
+	float: left;
+	width: 10%;
+	color: white;
+}
+a#send{
+	text-decoration: none;
+	float: left;
+	width: 10%;
+	color:lightgreen;
+}
+div.contact_validate{
+	float: left;
+	width: 80%;
+	text-align: center;
+	color: white;
+	font-weight: 700;
+}
+div.validate_title{
+	font-size: 0.9rem;
+	height: 2rem;
+	line-height: 2rem;
+	padding-left: 5%;
+	color: #888888;
+}
+div.validate_input{
+	height: 3rem;
+	line-height: 3rem;
+	background-color: #fff;
+	
+}
+input#validate_input{
+	margin: 0;
+	padding: 0;
+	height: 2.4rem;
+	border: 0;
+	margin-left: 5%;
+	width: 85%;
+	font-size: 1.1rem;
+}
+input#validate_input:focus{
+	outline: none;
+}
+img.erase{
+	height:1rem;
+	margin-top: 1rem;
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.es.chat.dao.chat.ChatGroupDao">
+	<select id="shortUuid" resultType="String">
+		SELECT UUID_SHORT()
+	</select>
+	<insert id="insertGroup" parameterType="Map">
+		INSERT INTO chat_group(id,group_name,create_timestamp,enable_flag,group_host)
+		VALUES(#{id},#{group_name},#{create_timestamp},'1',#{account})
+	</insert>
+	<insert id="insertGroupMember" parameterType="List">
+		INSERT INTO chat_group_account(group_id,account,create_timestamp,enable_flag)
+		VALUES
+	    <foreach collection="list" item="item" index="index" separator="," > 
+	        (#{item.group_id},#{item.account},#{item.create_timestamp},"1") 
+	    </foreach> 
+	</insert>
+	<select id="getGroupMemberAccount" parameterType="String" resultType="String">
+		SELECT account 
+		FROM chat_group_account
+		WHERE group_id = #{group_id}
+			AND enable_flag = '1'
+	</select>
+	<select id="groupList" parameterType="String" resultType="Map">
+		SELECT id,group_name,group_host,group_avatar
+		FROM chat_group
+		WHERE id IN(
+			SELECT group_id FROM chat_group_account 
+			WHERE account = #{account} AND enable_flag = '1'
+		)
+		AND enable_flag = '1'
+	</select>
+	<select id="getGroupInfo" parameterType="String" resultType="Map">
+		SELECT id,group_name,group_host,group_avatar
+		FROM chat_group
+		WHERE id = #{group_id}
+		AND enable_flag = '1'
+	</select>
+	<!-- 群聊记录 -->
+	<select id="getEarlierChat" parameterType="String" resultType="Map">
+		SELECT cm.*
+		FROM (SELECT ca.nickname,ca.gender,ca.avatar,gm.*
+		FROM chat_account ca,
+		(SELECT 
+			account as from_account,
+			(CASE WHEN account=#{account} THEN '1' ELSE '0' END) AS from_flag,
+			msg,
+			(CASE WHEN DATEDIFF(NOW(),create_timestamp) = 0
+						THEN DATE_FORMAT(create_timestamp,'%H:%i') 
+						WHEN DATEDIFF(NOW(),create_timestamp) = 1
+						THEN CONCAT('昨天',' ',DATE_FORMAT(create_timestamp,'%H:%i'))
+						WHEN DATEDIFF(NOW(),create_timestamp) > 1
+						THEN DATE_FORMAT(create_timestamp,'%Y年%m月%d日 %H:%i')
+			END) AS chat_time,create_timestamp
+		FROM chat_group_message
+		WHERE 
+			group_id = #{group_id}
+			AND enable_flag = '1'
+		) as gm
+		WHERE ca.account = gm.from_account
+		ORDER BY gm.create_timestamp DESC
+		LIMIT 30) cm
+		ORDER BY cm.create_timestamp ASC
+	
+	</select>
+	<insert id="recordMessage" parameterType="Map">
+		INSERT INTO chat_group_message(group_id,account,msg,create_timestamp,enable_flag)
+		VALUES
+	        (#{group_id},#{account},#{msg},NOW(),"1") 
+	</insert>
+</mapper>

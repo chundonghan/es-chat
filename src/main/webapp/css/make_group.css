@@ -1,0 +1,143 @@
+@charset "utf-8"
+html {
+	width: 100%;
+	font-size: 62.5%;
+	height: 62.5%;
+}
+
+body {
+	font-family: "微软雅黑";
+	height: 100%;
+	background-color: #f9f9f9;
+	padding: 0px;
+	margin: 0px;
+}
+
+div {
+	padding: 0px;
+	margin: 0px;
+}
+
+div.headline{
+	padding-left: 2%;
+	padding-right: 2%;
+	width: 96%;
+	height: 2.5rem;
+	background-color: #3c3c3c;
+	line-height: 2.5rem;
+}
+
+a#cancel{
+	text-decoration: none;
+	float: left;
+	width: 10%;
+	color: white;
+}
+a#group_save{
+	text-decoration: none;
+	float: left;
+	width: 10%;
+	color:grey;
+}
+div.select_title{
+	float: left;
+	width: 80%;
+	text-align: center;
+	color: white;
+	font-weight: 700;
+} 
+div.search_box{
+	height: 3rem;
+	width: 100%;
+	
+	
+}
+div.selected_avatar{
+	width: 0 auto;
+	max-width: 60%;
+	height: 3rem;
+	float: left;
+	overflow-y:auto;
+	overflow-x:hidden;
+	
+}
+div.selected_avatar>img{
+	height: 2.6rem;
+	width: 2.6rem;
+	margin-top: 0.1rem;
+	margin-left: 0.2rem;
+	float: left;
+}
+div.search_contact{
+	width:  22% ;
+	min-width: 22%;
+	float: left;
+	margin-left: 2%;
+}
+input.search_contact{
+	width: 100%;
+	min-width: 22%;
+	outline: none;
+	height: 2.4em;
+	margin-top: 0.2rem;
+	font-size: 1rem;
+	border: 0;
+}
+div.contact_list{
+	width: 100%;
+	height: auto;
+	border-bottom: 1px solid #ddd;
+}
+div.contact_init{
+	background-color: #ddd;
+	padding-left: 2%;
+	font-size: 0.6rem;
+}
+div.each_contact{
+	width: 90%;
+	margin-left: 2%;
+	height: 3rem;
+	border-bottom: 1px dotted #ccc;
+}
+div.each_contact:last-child{
+	border-bottom: 0;
+}
+div.ec_left{
+	
+	height: 2.8rem;
+	width: 3.2rem;
+	float: left;
+	margin-left: 0.1rem;
+	margin-top: 0.1rem;
+}
+img.ec_left{
+	height: 2.8rem;
+	width: 2.8rem;
+}
+div.ec_right{
+	float: left;
+	line-height: 3rem;
+}
+div.check{
+	margin-left: 2%;
+	width: 8%;
+	height: 3rem;
+	float: left;
+	position:relative;
+}
+div.circle{
+	border: 2px solid #5C5C5C;
+	width: 1.2rem;
+	height: 1.2rem;
+	margin-top: 0.9rem;
+	border-radius: 1.2rem;
+	
+}
+img.circle{
+	height: 1.55rem;
+	width: 1.55rem;
+	position:absolute;
+	top:28.5%;
+	left: -1%;
+	display: none;
+}

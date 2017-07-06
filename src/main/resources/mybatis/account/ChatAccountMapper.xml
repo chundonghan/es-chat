@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.es.chat.dao.chat.ChatAccountDao">
+	<insert id="signUp" parameterType="ChatAccount">
+		INSERT INTO chat_account(nickname,avatar,account,password,create_timestamp,enable_flag,phone)
+		VALUES(#{account},#{avatar},#{account},#{password},#{create_timestamp},'1',#{phone})
+	</insert>
+	<update id="resetPassword" parameterType="String" >
+		UPDATE chat_account SET password = #{newpass}
+		WHERE phone = #{phone} AND enable_flag = '1'
+	</update>
+	<select id="signIn" parameterType="ChatAccount" resultType="ChatAccount">
+		SELECT nickname,avatar FROM chat_account
+		WHERE
+			account = #{account}
+			AND password = #{password}
+			AND enable_flag = '1'
+	</select>
+	<update id="updateLogin" parameterType="ChatAccount">
+		UPDATE chat_account SET login_timestamp = #{login_timestamp}
+		WHERE
+			account = #{account}
+			AND password = #{password}
+			AND enable_flag = '1'
+	</update>
+	
+	<select id="getAllAccounts" resultType="String">
+		SELECT account FROM chat_account
+		WHERE
+			enable_flag = '1'
+	</select>
+	<select id="getAllPhones" resultType="String">
+		SELECT phone FROM chat_account
+		WHERE
+			enable_flag = '1'
+	</select>
+	<select id="getInfoByAccount" resultType="Map" parameterType="String">
+		SELECT account,nickname,avatar,
+		(CASE WHEN gender = '1' THEN '男' ELSE '女' END) AS gender
+		
+		FROM chat_account
+		WHERE 
+			enable_flag = '1'
+			AND account=#{account}
+	</select>
+	<select id="getIdByAccount" resultType="Integer" parameterType="String">
+		SELECT id FROM chat_account
+		WHERE 
+			enable_flag = '1'
+			AND account=#{account}
+	</select>
+	
+	<!-- authToken --> 
+	<select id="authToken" parameterType="String" resultType="Map">
+		SELECT auth_token,token_expire FROM chat_account
+		<where>
+			enable_flag = '1'
+			AND account=#{account}
+		</where>
+	</select>
+	<update id="updateToken" parameterType="Map">
+		update chat_account 
+		set salt=#{salt},auth_token=#{auth_token},token_expire=#{token_expire} 
+		where account =#{account} AND enable_flag = '1'
+	</update>
+	<update id="updateTokenExpire" parameterType="Map">
+		update chat_account 
+		set token_expire=#{token_expire} 
+		where account =#{account} AND enable_flag = '1'
+	</update>
+	
+	<update id="updateInfo" parameterType="Map">
+		update chat_account 
+		<set>
+			<if test="gender != null">
+				gender=#{gender},
+			</if>
+			<if test="avatar != null">
+				avatar=#{avatar},
+			</if>
+			<if test="nickname != null">
+				nickname=#{nickname},
+			</if>
+		</set>
+		where account =#{account} AND enable_flag = '1'
+	</update>
+</mapper>

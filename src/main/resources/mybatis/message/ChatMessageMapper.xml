@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.es.chat.dao.chat.ChatMessageDao">
+	<select id="getMessageList" parameterType="String" resultType="Map">
+		SELECT a.account,a.avatar,a.nickname,a.msg,a.last_chat_time,a.is_group
+		FROM 
+		(
+		SELECT ca.account,ca.avatar,ca.nickname,c.msg,c.last_chat_time,c.create_timestamp,'0' AS is_group
+				FROM chat_account ca,
+				(SELECT cl.for_group_account,cl.msg,
+				(CASE
+					WHEN DATEDIFF(NOW(),cl.create_timestamp) = 0
+					THEN DATE_FORMAT(cl.create_timestamp,'%H:%i') 
+					WHEN DATEDIFF(NOW(),cl.create_timestamp) = 1
+					THEN '昨天'
+					WHEN DATEDIFF(NOW(),cl.create_timestamp) = 2
+					THEN '前天'
+					WHEN (DATEDIFF(NOW(),cl.create_timestamp) &gt; 2 AND DATEDIFF(NOW(),cl.create_timestamp) &lt; 7)
+					THEN 
+						(CASE WHEN DATE_FORMAT(cl.create_timestamp,'%W') = 'monday' THEN '星期一' 
+									WHEN DATE_FORMAT(cl.create_timestamp,'%W') = 'tuesday' THEN '星期二' 
+									WHEN DATE_FORMAT(cl.create_timestamp,'%W') = 'wednesday' THEN '星期三' 
+									WHEN DATE_FORMAT(cl.create_timestamp,'%W') = 'thursday' THEN '星期四' 
+									WHEN DATE_FORMAT(cl.create_timestamp,'%W') = 'friday' THEN '星期五' 
+									WHEN DATE_FORMAT(cl.create_timestamp,'%W') = 'saturday' THEN '星期六' 
+									WHEN DATE_FORMAT(cl.create_timestamp,'%W') = 'sunday' THEN '星期日'
+						END) 
+					ELSE
+						DATE_FORMAT(cl.create_timestamp,'%Y/%m/%d') 
+				END) as last_chat_time,
+				cl.create_timestamp
+				FROM 
+				(SELECT * ,
+				(CASE WHEN from_account = #{account} THEN to_account
+					ELSE from_account END) AS for_group_account
+				FROM chat_message
+				WHERE 
+					from_account = #{account} 
+					OR to_account = #{account}
+					AND from_enable_flag = '1'
+				ORDER BY create_timestamp DESC) AS cl
+				GROUP BY for_group_account) c 
+				WHERE ca.account = c.for_group_account AND ca.enable_flag = '1'
+		UNION
+			SELECT 
+				cg.id AS account,
+				cg.group_avatar AS avatar,
+				cg.group_name AS nickname,
+				CONCAT((SELECT ca.nickname FROM chat_account ca WHERE ca.account = cgm2.account),':',cgm2.msg) AS msg,
+				(CASE
+					WHEN DATEDIFF(NOW(),cgm2.create_timestamp) = 0
+					THEN DATE_FORMAT(cgm2.create_timestamp,'%H:%i') 
+					WHEN DATEDIFF(NOW(),cgm2.create_timestamp) = 1
+					THEN '昨天'
+					WHEN DATEDIFF(NOW(),cgm2.create_timestamp) = 2
+					THEN '前天'
+					WHEN (DATEDIFF(NOW(),cgm2.create_timestamp) &gt; 2 AND DATEDIFF(NOW(),cgm2.create_timestamp) &lt; 7)
+					THEN 
+						(CASE WHEN DATE_FORMAT(cgm2.create_timestamp,'%W') = 'monday' THEN '星期一' 
+									WHEN DATE_FORMAT(cgm2.create_timestamp,'%W') = 'tuesday' THEN '星期二' 
+									WHEN DATE_FORMAT(cgm2.create_timestamp,'%W') = 'wednesday' THEN '星期三' 
+									WHEN DATE_FORMAT(cgm2.create_timestamp,'%W') = 'thursday' THEN '星期四' 
+									WHEN DATE_FORMAT(cgm2.create_timestamp,'%W') = 'friday' THEN '星期五' 
+									WHEN DATE_FORMAT(cgm2.create_timestamp,'%W') = 'saturday' THEN '星期六' 
+									WHEN DATE_FORMAT(cgm2.create_timestamp,'%W') = 'sunday' THEN '星期日'
+						END) 
+					ELSE
+						DATE_FORMAT(cgm2.create_timestamp,'%Y/%m/%d') 
+				END) as last_chat_time,
+				cgm2.create_timestamp,'1' AS is_group
+			FROM chat_group cg,
+			(SELECT cgm.*
+			FROM 
+			(SELECT group_id,account,msg,create_timestamp
+			FROM chat_group_message
+			WHERE group_id IN(
+				SELECT group_id
+				FROM chat_group_account cga
+				WHERE account = #{account}
+					AND enable_flag = '1') AND enable_flag = '1'
+			ORDER BY create_timestamp DESC) cgm
+			GROUP BY cgm.group_id) cgm2
+			WHERE cgm2.group_id = cg.id AND cg.enable_flag = '1'
+		) a
+		ORDER BY a.create_timestamp DESC
+	</select>
+	<select id="getEarlierChat" parameterType="String" resultType="Map">
+		SELECT cm.from_nickname,cm.from_avatar,cm.from_account,cm.from_flag,cm.msg,cm.chat_time
+		FROM (SELECT 
+			(SELECT nickname FROM chat_account WHERE account = from_account) AS from_nickname,
+			(SELECT avatar FROM chat_account WHERE account = from_account) AS from_avatar,
+			from_account,
+			#from_flag  1 自己 0 对方
+			(CASE WHEN from_account=#{from_account} THEN '1' ELSE '0' END) AS from_flag,
+			msg,
+			(CASE WHEN DATEDIFF(NOW(),create_timestamp) = 0
+						THEN DATE_FORMAT(create_timestamp,'%H:%i') 
+						WHEN DATEDIFF(NOW(),create_timestamp) = 1
+						THEN CONCAT('昨天',' ',DATE_FORMAT(create_timestamp,'%H:%i'))
+						WHEN DATEDIFF(NOW(),create_timestamp) &gt; 1
+						THEN DATE_FORMAT(create_timestamp,'%Y年%m月%d日 %H:%i')
+			END) AS chat_time,create_timestamp
+		FROM chat_message
+		WHERE 
+			(from_account = #{from_account} 
+			AND to_account = #{to_account}) 
+			OR 
+			(from_account = #{to_account} 
+			AND to_account = #{from_account})
+			AND from_enable_flag = '1'
+		ORDER BY create_timestamp DESC
+		LIMIT 30) cm
+		ORDER BY cm.create_timestamp ASC
+	</select>
+	<insert id="recordMessage" parameterType="Map">
+		INSERT INTO chat_message(from_account,to_account,msg,create_timestamp,from_enable_flag,to_enable_flag)
+		VALUES(#{from_account},#{to_account},#{msg},NOW(),'1','1')
+	</insert>
+</mapper>

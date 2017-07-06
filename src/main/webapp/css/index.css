@@ -1,0 +1,352 @@
+@charset "utf-8"
+html {
+	width: 100%;
+	font-size: 62.5%;
+	height: 62.5%;
+}
+
+body {
+	font-family: "微软雅黑";
+	height: 100%;
+	background-color: #f9f9f9;
+	padding: 0px;
+	margin: 0px;
+}
+
+div {
+	padding: 0px;
+	margin: 0px;
+}
+a#history{
+	text-decoration: none;
+	position: absolute;
+	margin-top: 0.7rem;
+	margin-left: 0.6rem;
+	
+}
+img#history{
+	height: 1.3rem;
+}
+header{
+	width: 100%;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	text-align: center;
+	color: white;
+	font-weight: 900;
+	font-size: 1.2em;
+	background-color: #3c3c3c;
+	
+}
+footer{
+	width: 100%;
+	height: 2.5rem;
+	border-top: 1px solid #cccccc;
+	position: fixed;
+	bottom: 0;
+	background-color: #ffffff;
+}
+ul,li{
+	margin: 0;
+	padding: 0;
+}
+
+footer>ul{
+	list-style: none;
+	
+}
+footer>ul>li{
+	float: left;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	width: 25%;
+	text-align: center;
+}
+img#chat,
+img#contact,
+img#discover,
+img#me{
+	margin-top: 0.3rem;
+	height: 1.9rem;
+	
+}
+img#chat_,
+img#contact_,
+img#discover_,
+img#me_{
+	margin-top: 0.3rem;
+	height: 1.9rem;
+	display: none;
+}
+section{
+	margin: 0;
+	padding: 0;
+	margin-bottom: 13%;
+}
+div.chat_search,div.contact_search{
+	width: 100%;
+	height: 2rem;
+	background-color: #ddd;
+	padding-top: 0.4rem;
+}
+div.chat_search_box,div.contact_search_box{
+	margin-left: 5%;
+	padding: 0;
+	height: 1.4rem;
+	width: 90%;
+	border-radius: 0.4rem;
+	font-size: 0.9rem;
+	text-align: center;
+	border: 1px solid #cccccc;
+	background-color: #fff;
+}
+img.chat_search_box,img.contact_search_box{
+	vertical-align: middle;
+	
+}
+div.each_chat{
+	margin-left:5%;
+	margin-top: 0.5rem;
+	width: 90%;
+	height: 3.2rem;
+	border-bottom: 1px dotted #C8CCCF;
+}
+div.west{
+	float: left;
+	height: 3rem;
+}
+div.west>img{
+	height: 3rem;
+	width: 3rem;
+}
+div.east{
+	margin-left:2%;
+	float: right;
+	width: 80%;
+}
+div.north{
+	display: block;
+	width: 100%;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	
+}
+div.nickname{
+	display: inline-block;
+	font-weight: 800;
+}
+div.last_time{
+	float: right;
+	font-size: 0.9rem;
+	color: #999999;
+}
+div.south{
+	display: block;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	font-size: 0.9rem;
+	color: #999999;
+}
+div.end{
+	margin-top: 0.5rem;
+	text-align: center;
+	font-size: 0.9rem;
+}
+div.contact_menu{
+	border-bottom: 1px solid #ddd;
+}
+div.contact_each_menu{
+	margin-left: 5%;
+	width: 95%;
+	border-bottom: 1px dotted #cccccc;
+	
+	height: auto;
+}
+div.contact_each_menu:last-child{
+	border-bottom: 0;
+}
+div.cam_left{
+	width: 20%;
+	height: 3rem;
+	float: left;
+	
+}
+img.cam_left{
+	margin-left: 0.1rem;
+	margin-top: 0.1rem;
+	height: 2.8rem;
+} 
+div.cam_right{
+	width: 70%;
+	height: 3rem;
+	line-height: 3rem;
+	font-weight: 900;
+}
+div.contact_list{
+	width: 100%;
+	height: auto;
+	border-bottom: 1px solid #ddd;
+}
+div.contact_init{
+	background-color: #ddd;
+	padding-left: 5%;
+	font-size: 0.6rem;
+}
+div.each_contact{
+	width: 95%;
+	margin-left: 5%;
+	height: 3rem;
+	border-bottom: 1px dotted #ccc;
+}
+div.each_contact:last-child{
+	border-bottom: 0;
+}
+div.ec_left{
+	
+	height: 2.8rem;
+	width: 3.2rem;
+	float: left;
+	margin-left: 0.1rem;
+	margin-top: 0.1rem;
+}
+img.ec_left{
+	height: 2.8rem;
+	width:2.8rem;
+}
+div.ec_right{
+	line-height: 3rem;
+}
+div.chat_red_dot{
+	position: absolute;
+	background-color: #FF3300;
+	left: 3.8rem;
+	margin-top: 0.1rem;
+	height: .5rem;
+	width: .5rem;
+	border-radius: 0.25rem;
+}
+
+
+/* me */
+div.me_detail{
+	width: 100%;
+	height: 5rem;
+	margin-top: 0.7rem;
+	background-color: #f9f9f9;
+	
+}
+div.me_detail>div.west{
+	float: left;
+	height: 5rem;
+	margin-top: 0.4rem;
+	margin-left: 5%;
+	width: 20%;
+}
+div.me_detail>div.west>img.west{
+	height: 4rem;
+	width: 4rem;
+}
+div.me_detail>div.east{
+	height: 5rem;
+	width: 67%;
+	float: left;
+}
+div.me_detail>div.east>div.north{
+	height: 2.5rem;
+	width: 100%;
+	line-height: 3rem;
+}
+div.me_detail>div.east>div.south{
+	height: 2.5rem;
+	width: 100%;
+}
+div.setting{
+	width: 100%;
+	height: 3rem;
+	margin-top: 1rem;
+	background-color: #f9f9f9;
+}
+div.setting>div.setting_content{
+	display: inline-block;
+	height: 3rem;
+	line-height: 3rem;
+	margin-left: 5%;
+}
+div.setting>img.right_arrow{
+	margin: 0;
+	padding: 0;
+	float: right;
+	height: 1.5rem;
+	margin-right: 2%;
+	margin-top: 0.7rem;
+}
+div.me_detail>div.right_arrow{
+	height: 5rem;
+	line-height: 5rem;
+}
+div.me_detail>div.right_arrow>img.me{
+	height: 1.5rem;
+}
+
+a.add_more{
+	position: absolute;
+	right: 0;
+	top:0;
+	text-decoration: none;
+	color: #fff;
+	font-size: 1.8rem;
+	height: 2.5rem;
+	width: 10%;
+}
+div.add_more {
+	margin-left: 10%;
+	margin-top: 0.3rem;
+	width: 30%;
+	height: auto;
+	border: 1px solid #5C5C5C;
+	background-color: #5C5C5C;
+	border-radius: 0.2rem;
+	position: absolute;
+	top: 2.5rem;
+	right: 3%;
+	display: none;
+}
+
+div.out,
+div.in {
+	position: absolute;
+	width: 0;
+	height: 0px;
+}
+
+div.out {
+	border: 0.5rem solid transparent;
+	border-bottom-color: #5C5C5C;
+	top: -1rem;
+	right: 6%;
+}
+
+div.in {
+	border: 0.4rem solid transparent;
+	border-bottom-color: #5C5C5C;
+	top: -0.7rem;
+	right: 7%;
+}
+div.each_opt{
+	border-bottom: 1px solid #e9e9e9;
+	height: 2rem;
+	width: 90%;
+	margin-left: 5%;
+}
+img.opt_img{
+	height: 2rem;
+	width: 2rem;
+	float: left;
+	margin-right: 4%;
+}
+div.opt_title{
+	height: 2rem;
+	line-height: 2rem;
+	color: #e9e9e9;
+	
+}

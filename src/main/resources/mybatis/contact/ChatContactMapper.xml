@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.es.chat.dao.chat.ChatContactDao">
+	<!-- 申请好友 -->
+	<insert id="applyContact" parameterType="ChatContact">
+		INSERT INTO chat_contact(account_id,contact_account_id,create_timestamp,enable_flag,validate_msg)
+		VALUES(#{account_id},#{contact_account_id},#{create_timestamp},'1',#{validate_msg})
+	</insert>
+	<!-- 关系是否存在 -->
+	<select id="contactIsExist" parameterType="ChatContact" resultType="int">
+		SELECT count(1) 
+		FROM chat_contact
+		WHERE
+			account_id=#{account_id}
+			AND contact_account_id = #{contact_account_id}
+	</select>
+	<!-- 好友列表 -->
+	<select id="contactList" resultType="Map" parameterType="String">
+		SELECT id,nickname,avatar,account
+		FROM chat_account 
+		WHERE id IN(
+			SELECT contact_account_id FROM
+			(SELECT contact_account_id
+			FROM chat_contact 
+			WHERE account_id = (
+				SELECT id FROM chat_account WHERE account = #{account} AND enable_flag = '1'
+				) 
+			AND enable_flag = '1'
+			) cai
+			,
+			(SELECT account_id
+			FROM chat_contact 
+			WHERE contact_account_id = (
+				SELECT id FROM chat_account WHERE account = #{account} AND enable_flag = '1'
+				)
+			AND enable_flag = '1'
+			) ai
+			WHERE cai.contact_account_id = ai.account_id
+		)
+	</select>
+	<select id="validateIfMyFriend" resultType="int" parameterType="String">
+		SELECT COUNT(1) FROM
+			(SELECT contact_account_id
+			FROM chat_contact 
+			WHERE account_id = (
+				SELECT id FROM chat_account WHERE account = #{account} AND enable_flag = '1'
+				) 
+			AND enable_flag = '1'  
+			AND	contact_account_id =(
+					SELECT id FROM chat_account WHERE account = #{contact_account} AND enable_flag = '1'
+				)
+			) cai
+			,
+			(SELECT account_id
+			FROM chat_contact 
+			WHERE contact_account_id = (
+				SELECT id FROM chat_account WHERE account = #{account} AND enable_flag = '1'
+				)
+			AND enable_flag = '1' 
+			AND	account_id =(
+					SELECT id FROM chat_account WHERE account = #{contact_account} AND enable_flag = '1'
+				)
+			) ai
+		WHERE cai.contact_account_id = ai.account_id
+	</select>
+	
+	<select id="applyList" parameterType="String" resultType="Map">
+		SELECT ca.nickname,ca.account,ca.avatar,cc.validate_msg,cc.is_contacted
+			FROM chat_account ca,
+			(SELECT account_id,create_timestamp,validate_msg,
+			(CASE WHEN
+				(SELECT count(c.account_id) 
+				FROM chat_contact c 
+				WHERE c.contact_account_id = ch.account_id AND c.account_id = (
+					SELECT id FROM chat_account 
+					WHERE account = #{account}
+					AND enable_flag = '1')
+				) = 1
+				THEN 1
+				ELSE 0
+			END) AS is_contacted
+			FROM chat_contact ch
+			WHERE contact_account_id = (
+				SELECT id FROM chat_account 
+				WHERE account = #{account}
+				AND enable_flag = '1'
+			) AND validate_msg &lt;&gt; ''
+			) cc WHERE ca.id = cc.account_id
+			ORDER BY cc.create_timestamp DESC 
+	</select>
+</mapper>

@@ -1,0 +1,240 @@
+@charset "utf-8"
+html {
+	width: 100%;
+	font-size: 62.5%;
+	height: 62.5%;
+}
+
+body {
+	font-family: "微软雅黑";
+	height: 100%;
+	background-color: #f9f9f9;
+	padding: 0px;
+	margin: 0px;
+}
+
+div {
+	padding: 0px;
+	margin: 0px;
+}
+a#history{
+	text-decoration: none;
+	position: fixed;
+	margin-top: 0.5rem;
+	margin-left: 0.6rem;
+	z-index: 100;
+	top: 0;
+	
+}
+img#history{
+	height: 1.4rem;
+}
+div.history{
+	color:white;
+	display: inline-block;
+	vertical-align: super;
+}
+header{
+	width: 100%;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	text-align: center;
+	color: white;
+	font-weight: 900;
+	font-size: 1.2em;
+	background-color: #3c3c3c;
+	position: fixed;
+	top: 0;
+	z-index: 99;
+}
+section{
+	margin: 0;
+	padding: 0;
+	margin-top: 2.5rem;
+}
+div.new_contact_search{
+	width: 100%;
+	height: 2rem;
+	background-color: #ddd;
+	padding-top: 0.4rem;
+}
+div.new_contact_search_box{
+	margin-left: 5%;
+	padding: 0;
+	height: 1.4rem;
+	width: 90%;
+	border-radius: 0.4rem;
+	font-size: 0.9rem;
+	text-align: center;
+	border: 1px solid #cccccc;
+	background-color: #fff;
+}
+img.new_contact_search_box{
+	vertical-align: middle;
+	
+}
+div.new_contact_list{
+	width: 90%;
+	margin-left: 5%;
+	height: auto;
+}
+div.each_contact{
+	width: 100%;
+	height: 2.5rem;
+	margin-top: 0.2rem;
+	border-bottom: 1px dotted #a9a9a9;
+	
+}
+div.west{
+	float: left;
+	height: 2.5rem;	
+	margin-right: 2%;
+}
+img.new_contact_avatar{
+	height: 2.5rem;	
+	width: 2.5rem;
+}
+div.center{
+	float: left;
+	width: 60%;
+	height: 2.5rem;	
+}
+
+div.south,div.north{
+	height: 1.25rem;
+	font-size: 0.9rem;
+	color: #aaa;
+}
+div.north{
+	color: #000;
+	font-weight: 700;
+}
+div.east{
+	height: 2.5rem;
+	line-height: 2.5rem;	
+	float: right;
+	text-align: center;
+	width: 15%;
+}
+a#contact_add{
+	text-decoration: none;
+	border: 1px solid lightskyblue;
+	border-radius: .2rem;
+	padding: .2rem;
+	color: white;
+	background-color: lightskyblue;
+	font-size: 0.8rem;
+}
+a#contact_added{
+	text-decoration: none;
+	padding: .2rem;
+	color: gray;
+	font-size: 0.8rem;
+}
+div.search_pop{
+	display: none; 
+	position: absolute; 
+	top: 0%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	background-color: white; 
+	z-index:1001; 
+}
+div.search_top{
+	width: 95%;
+	padding-left: 5%;
+	height: 2rem;
+	padding-top: 0.5rem;
+	background-color: #D8DEE2;
+}
+div.search_top_left{
+	width: 80%;
+	float: left;
+}
+div.search_top_right{
+	width: 15%;
+	float: right;
+	height: 1.5rem;
+	line-height: 1.5rem;
+}
+div.search_box{
+	background-color: #fff;
+	border: 1px solid #808080;
+	border-radius: .4rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+}
+img.search_box{
+	float: left;
+	height: 1rem;
+	margin-top: 0.25rem;
+	margin-left: 0.25rem;
+	margin-right: .25rem;
+	
+}
+input.search_account{
+	float: left;
+	height: 1.1rem;
+	width: 80%;
+	border:0;
+}
+input.search_account:focus{
+	outline:none;
+}
+div.search_erase{
+	float: right;
+	height: 1rem;
+	margin-top: 0.1rem;
+	width: 7%;
+}
+img.search_erase{
+	height: 1rem;
+	display: none;
+}
+a.search_cancel{
+	text-decoration: none;
+	color: #129611;
+}
+div.search_content{
+	margin-left: 5%;
+	width: 90%;
+	height: 4rem;
+	border-bottom: 1px dotted #ccc;
+	display: none;
+}
+
+div.image{
+	float: left;
+	height: 4rem;
+	width: 18%;
+}
+div.image>img{
+	height: 3rem;
+	margin-top: 0.5rem;
+}
+div.search_text{
+	height: 4rem;
+	line-height: 4rem;
+}
+div.search_title{
+	float: left;
+	width: auto;
+}
+div.search_text_detail{
+	float: left;
+	width: 60%;
+	max-width: 60%;
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+	overflow: hidden; 
+}
+div.not_exist{
+	width: 100%;
+	height:6rem;
+	text-align: center;
+	font-size: 1rem;
+	color:#A9A9A9;
+	line-height: 6rem;
+	display: none;
+}
