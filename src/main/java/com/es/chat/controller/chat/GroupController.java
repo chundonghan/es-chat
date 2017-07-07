@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.es.chat.controller.BaseController;
+import com.es.chat.interceptors.Token;
 import com.es.chat.service.chat.ChatAccountService;
 import com.es.chat.service.chat.ChatGroupService;
 
@@ -25,11 +26,12 @@ public class GroupController extends BaseController {
 	private ChatGroupService chatGroupService;
 	@Autowired
 	private ChatAccountService chatAccountService;
-	
+	@Token(save = true)
 	@RequestMapping(value="/toMakeGroup",method={RequestMethod.GET})
 	public ModelAndView toMakeGroup(){
 		return new ModelAndView("group/make_group");
 	}
+	@Token(remove = true)
 	@RequestMapping(value = "/makeGroup", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public String makeGroup(HttpServletRequest request,HttpSession session,@RequestParam(value="contacts[]") String[] contacts) {
