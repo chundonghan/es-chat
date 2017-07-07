@@ -35,5 +35,6 @@
 	<div id="showMessage" class="showMessage" ></div>
 	<input id="basePath" type="hidden"
 		value="${pageContext.request.contextPath}" />
+	<input id="token" type="hidden" value="${token}" />
 </body>
 </html>

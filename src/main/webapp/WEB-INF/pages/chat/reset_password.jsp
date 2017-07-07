@@ -17,6 +17,7 @@
 <script>
 	var basePath;
 	$(function() {
+		var token ="${token}";
 		basePath = $("input#basePath").val();
 		$("button#signupbtn").click(function(){
 			var newpass = $("input#phone").val();
@@ -26,7 +27,8 @@
 				url : "./resetPassword",
 				data : {
 					newpass : newpass,
-					confirmpass:confirmpass
+					confirmpass:confirmpass,
+					token:token
 				},
 				dataType : "text",
 				success : function(res) {

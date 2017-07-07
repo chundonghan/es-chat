@@ -33,6 +33,7 @@ public class ChatGroupServiceImpl extends BaseService implements ChatGroupServic
 		param.put("group_name", account+"等");
 		param.put("create_timestamp", create_timestamp);
 		param.put("account", account);
+		param.put("group_avatar", "img/wangzhe.png");
 		chatGroupDao.insertGroup(param);
 		
 		List<Map<String, Object>> params = setParams(group_id, contacts,account);

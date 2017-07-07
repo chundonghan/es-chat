@@ -1,7 +1,9 @@
 var basePath;
 var selected_contact = [];
+var token;
 $(function(){
 	basePath = $("input#basePath").val();
+	token = $("input#token").val();
 	contactSection();
 	initialSearchBox();
 	$("body").on('click touchend', 'div.each_contact', function(){
@@ -20,10 +22,11 @@ $(function(){
 		}
 		if(selected_contact.length>0){
 			$("a#group_save").text("确定("+selected_contact.length+")");
-			$("a#group_save").css({"color":"lightgreen"})
+			$("a#group_save").css({"color":"lightgreen"});
+			
 		}else{
 			$("a#group_save").text("确定");
-			$("a#group_save").css({"color":"grey"})
+			$("a#group_save").css({"color":"grey"});
 		}
 		initialSearchBox();
 	})
@@ -40,7 +43,7 @@ $(function(){
 			dataType : "text",
 			success : function(res) {
 				if(res == "succ"){
-					
+					window.location.href=basePath+"/chat/index";
 				}else{
 					toast("创建失败","showMessage");
 				}

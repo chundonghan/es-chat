@@ -41,7 +41,7 @@
 	        <mvc:interceptor>
 	            <mvc:mapping path="/chat/toResetPassword"/>
 	            <mvc:mapping path="/chat/resetPassword"/>
-	            <bean class="com.es.chat.interceptors"/><!--class文件路径改成你自己写得拦截器路径！！ -->
+	            <bean class="com.es.chat.interceptors.TokenInterceptor"/><!--class文件路径改成你自己写得拦截器路径！！ -->
 	        </mvc:interceptor>
 	       <mvc:interceptor> 
 	            <mvc:mapping path="/chat/index"/>

@@ -30,18 +30,19 @@ div.headline{
 a#cancel{
 	text-decoration: none;
 	float: left;
-	width: 10%;
+	width: 14%;
 	color: white;
 }
 a#group_save{
 	text-decoration: none;
 	float: left;
-	width: 10%;
+	width: 14%;
 	color:grey;
+	text-align: right;
 }
 div.select_title{
 	float: left;
-	width: 80%;
+	width: 72%;
 	text-align: center;
 	color: white;
 	font-weight: 700;

@@ -6,8 +6,8 @@
 		SELECT UUID_SHORT()
 	</select>
 	<insert id="insertGroup" parameterType="Map">
-		INSERT INTO chat_group(id,group_name,create_timestamp,enable_flag,group_host)
-		VALUES(#{id},#{group_name},#{create_timestamp},'1',#{account})
+		INSERT INTO chat_group(id,group_name,create_timestamp,enable_flag,group_host,group_avatar)
+		VALUES(#{id},#{group_name},#{create_timestamp},'1',#{account},#{group_avatar})
 	</insert>
 	<insert id="insertGroupMember" parameterType="List">
 		INSERT INTO chat_group_account(group_id,account,create_timestamp,enable_flag)

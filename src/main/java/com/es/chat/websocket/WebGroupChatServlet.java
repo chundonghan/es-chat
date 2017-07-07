@@ -126,8 +126,10 @@ public class WebGroupChatServlet {
 		String send_msg = nickname + ":" + message.substring(message.indexOf(":") + 1);
 		while (it.hasNext()) {
 			wpskey = it.next();
+			
 			if (wpskey.equals(currentUser)) {
 			} else {
+				System.out.println(wpskey);
 				webPushServlet = WebPushServlet.chatClients.get(wpskey);
 				_key = "#"+key + "@" + wpskey;
 				if (webPushServlet != null) {
