@@ -1,0 +1,13 @@
+访问者模式的意图是在不改变类层次结构的前提下，对该层次结构进行扩展。
+
+抽象访问者Visitor
+	visit(ConcreteElement element);
+访问者
+	visit(ConcreteElement element)
+		element.doSomething();
+抽象元素类Element
+	accept(Visitor visitor);
+	doSomething();
+元素类ConcreteElement
+	accept(Visitor visitor)
+		visitor.visit(this);

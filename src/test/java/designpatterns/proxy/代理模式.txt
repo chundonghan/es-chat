@@ -1,0 +1,10 @@
+代理模式的意图是通过提供一个代理或者占位符来控制对该对象的访问。
+
+为其他对象提供一种代理以控制这个对象的访问
+职责清晰
+高扩展性
+智能化
+
+动态代理
+	实现InvocationHandler
+	-- Proxy.newProxyInstance(classLoader,interfaces, new DynamicProxyHandler(real));

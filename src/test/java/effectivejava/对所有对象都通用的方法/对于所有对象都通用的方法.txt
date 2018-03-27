@@ -1,0 +1,28 @@
+第8条：覆盖equals时请遵守通用的约定
+	类的每一个实例本质上是唯一的
+	== ×
+	超类覆盖equals  子类也适合
+	类似有 包级私有 equals要重写 throw new AssertionError();
+
+	equals等价关系
+		自反性 x.equals(x) true
+		对称性 x.equals(y) y.equals(x)
+		传递性 x.equals(y) y.equals(z) => x.equals(z)
+		一致性 
+		非空性 不允许抛出空异常 instanceof 判断
+		
+第9条：覆盖equals时总要覆盖hashCode
+	相等的对象必须具有相等的散列码。 反过来不成立
+	
+第10条：始终要覆盖toString
+
+第11条：谨慎地覆盖clone
+	super.clone();
+
+第12条：考虑实现Comparable接口
+	public interface Comparable<T>{
+		int compareTo(T t);
+	}
+	-1 0 1
+
+	浮点域比较 Double.compare Float.compare

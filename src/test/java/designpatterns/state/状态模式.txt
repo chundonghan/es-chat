@@ -1,0 +1,28 @@
+状态模式的意图是将表示对象状态的逻辑分散到代表状态的不同类中。
+
+State 抽象状态角色 
+	setContext
+	handle1();
+	handle2();
+ConcreteState 具体状态角色
+	自己的状态类实现自己的方法  其他方法根据业务：是设置其他状态还是不做操作
+	例如：
+		ConcreteState1
+			实现handler1具体业务
+			handle2 看情况
+Context 环境角色
+	定义多有状态 常量
+	声明当前状态
+		currentState
+		get
+		set
+			多加一行 this.currentState.setContext(this);
+	委托方法 
+		handle1 handle2 实现对应状态中的方法
+		
+结构清晰
+遵循开闭和单一职责原则
+封装性非常好
+
+行为随状态改变而改变的场景
+条件 分支判断语句的替代者

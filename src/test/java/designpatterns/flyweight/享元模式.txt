@@ -1,0 +1,14 @@
+享元模式的意图是通过共享来有效地支持大量细粒度的对象。
+不变性
+
+享元模式是池技术的重要实现方式
+内部状态
+	对象可共享出来的信息
+外部状态
+	标记
+
+Flyweight 抽象享元角色
+ConcreteFlyweight 具体享元角色
+UnsharedConcreteFlyweight 不可共享的享元角色
+FlyweightFactory 享元工厂
+

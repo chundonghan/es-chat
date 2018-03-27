@@ -1,0 +1,18 @@
+装饰器模式的意图是在运行时组合操作的新变化
+IO
+
+动态地给一个对象添加一些额外的职责。
+就增加功能来说，装饰模式相比生成子类更加灵活。
+
+Component抽象构件
+
+ConcreteComponent具体构件
+
+Decorator装饰角色
+
+ConcreteDecorator具体装饰角色
+
+
+装饰类和被装饰类可以独立发展
+继承关系的一种替代方案 Decorator返回还是Component  is-a
+动态地扩展一个实现类的功能

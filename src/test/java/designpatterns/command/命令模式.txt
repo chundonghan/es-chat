@@ -1,0 +1,7 @@
+命令模式的意图是将请求封装在对象内部
+高内聚
+	Receive接收者角色
+	Command命令角色
+	Invoker调用者角色
+	
+封闭Receiver方式

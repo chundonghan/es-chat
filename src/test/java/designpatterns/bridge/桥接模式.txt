@@ -1,0 +1,7 @@
+桥接模式的意图在于是将抽象与抽象方法的实现相互分离来实现解耦，
+以便二者可以相互独立的变化
+类继承过多情况考虑使用桥接
+Abstraction 抽象化角色
+Implementor 实现化角色
+RefinedAbstraction 修正抽象化角色
+ConcreteImplementor 具体实现化角色

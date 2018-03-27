@@ -1,0 +1,25 @@
+抽象工厂模式其意图是允许创建一族相关或相互依赖的对象。
+
+	interface Human
+		abstract class AbstractWhiteHuman
+			class FemaleWhiteHuman
+			class MaleWhiteHuman
+		abstract class AbstractBlackHuman
+		 	class FemaleBlackHuman
+			class MaleBlackHuman
+		abstract class AbstractYellowHuman
+			class FemaleYellowHuman
+			class MaleYellowHuman
+	interface HumanFatory
+		class FemaleFatory
+			public Human createBlackHuman(){
+				return new FemaleBlackHuman();
+			} 
+			...
+		class MaleFatory
+			public Human createBlackHuman(){
+				return new MaleBlackHuman();
+			} 
+			...
+横向扩展容易  纵向扩展困难
+开闭原则
